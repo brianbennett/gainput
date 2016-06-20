@@ -1,4 +1,3 @@
-
 project(gainput)
 
 set(CMAKE_MACOSX_RPATH 1)
@@ -15,9 +14,13 @@ if(APPLE)
 	file(GLOB_RECURSE mmsources source/*.mm)
 endif()
 
-add_library(gainputstatic STATIC ${sources} ${mmsources})
+if (GAINPUT_STATICLIB)
+    add_library(gainputstatic STATIC ${sources} ${mmsources})
+endif()
 
-add_library(gainput SHARED ${sources} ${mmsources})
+if (GAINPUT_DYNAMICLIB)
+    add_library(gainput SHARED ${sources} ${mmsources})
+endif()
 
 if(WIN32)
 	target_link_libraries(gainput ${XINPUT} ws2_32)

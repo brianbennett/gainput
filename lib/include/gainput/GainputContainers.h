@@ -319,7 +319,7 @@ public:
 
 		if (vi == InvalidKey)
 		{
-			keys_[ha] = values_.size();
+			keys_[ha] = static_cast<uint32_t>(values_.size());
 		}
 		else
 		{
@@ -327,7 +327,7 @@ public:
 			{
 				if (values_[vi].next == InvalidKey)
 				{
-					values_[vi].next = values_.size();
+					values_[vi].next = static_cast<uint32_t>(values_.size());
 					break;
 				}
 				else
@@ -391,7 +391,7 @@ public:
 				}
 				else
 				{
-					uint32_t lastVi = values_.size()-1;
+					uint32_t lastVi = static_cast<uint32_t>(values_.size()) - 1;
 					values_[vi] = values_[lastVi];
 					values_.pop_back();
 					

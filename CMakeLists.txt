@@ -1,5 +1,14 @@
 cmake_minimum_required(VERSION 2.8)
 
+option(GAINPUT_STATICLIB "Build Gainput static lib" ON)
+option(GAINPUT_DYNAMICLIB "Build Gainput dynamic lib" ON)
+option(GAINPUT_SAMPLES "Build Samples for Gainput" ON)
+option(GAINPUT_TESTS "Build Tests for Gainput" ON)
+
+if (MSVC)
+    add_definitions("/D_CRT_SECURE_NO_WARNINGS")
+endif()
+
 if(!WIN32)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic -Wextra")
 else()
@@ -15,7 +24,9 @@ if(ANDROID)
 endif()
 
 add_subdirectory(lib)
-add_subdirectory(samples)
-add_subdirectory(test)
-
-
+if(GAINPUT_SAMPLES)
+    add_subdirectory(samples)
+endif()
+if (GAINPUT_TESTS)
+    add_subdirectory(test)
+endif()

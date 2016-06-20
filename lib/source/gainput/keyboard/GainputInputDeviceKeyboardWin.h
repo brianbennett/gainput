@@ -164,7 +164,7 @@ public:
 				return;
 			}
 
-			const int key = msg.wParam;
+			const WPARAM key = msg.wParam;
 			if (key == 0x08 // backspace 
 				|| key == 0x0A // linefeed 
 				|| key == 0x1B // escape 
@@ -174,7 +174,7 @@ public:
 			{
 				return;
 			}
-			const char charKey = key;
+			const char charKey = static_cast<char>(key);
 			textBuffer_.Put(charKey);
 #ifdef GAINPUT_DEBUG
 			GAINPUT_LOG("Text: %c\n", charKey);
@@ -183,18 +183,18 @@ public:
 		}
 
 		bool pressed = false;
-		unsigned winKey;
+		uint32_t winKey;
 		switch (msg.message)
 		{
 		case WM_KEYDOWN:
 		case WM_SYSKEYDOWN:
 			pressed = true;
-			winKey = msg.wParam;
+			winKey = static_cast<uint32_t>(msg.wParam);
 			break;
 		case WM_KEYUP:
 		case WM_SYSKEYUP:
 			pressed = false;
-			winKey = msg.wParam;
+			winKey = static_cast<uint32_t>(msg.wParam);
 			break;
 		default: // Non-keyboard message
 			return;
