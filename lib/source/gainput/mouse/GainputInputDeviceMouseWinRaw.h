@@ -77,8 +77,8 @@ public:
 			return;
 		}
 
-		UINT dwSize = 40;
-		static BYTE lpb[40];
+		UINT dwSize = 64;
+		static BYTE lpb[64];
 	    
 		GetRawInputData((HRAWINPUT)msg.lParam, RID_INPUT, lpb, &dwSize, sizeof(RAWINPUTHEADER));
 	    
